@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fatura Energisa Editável</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background-color: #f0f0f0; display: flex; justify-content: center; align-items: flex-start; }
+    .invoice-container { background-color: white; padding: 0; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 827px; /* Largura do A4 em pixels a ~96DPI */ height: 580px; /* Altura ajustada para cortar a parte inferior */ overflow: hidden; position: relative; }
+    svg { display: block; margin: auto; font-family: Arial, sans-serif; }
+    input, textarea {
+      font-family: Arial, sans-serif;
+      border: none; /* Bordas invisíveis por padrão */
+      background: transparent;
+      padding: 0; 
+      margin: 0;
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      resize: none;
+      line-height: 1.0; /* Ajuste para melhor encaixe vertical */
+      color: #000; /* Cor do texto padrão */
+    }
+    input:focus, textarea:focus {
+      outline: 1px solid blue; /* Borda azul ao focar para indicar edição */
+      background-color: rgba(0,0,255,0.05); /* Leve fundo azul ao focar */
+    }
+    /* Classes para alinhamento de texto, se necessário via JS ou diretamente no style do input */
+    .text-right { text-align: right; }
+    .text-center { text-align: center; }
+    .text-left { text-align: left; }
+  </style>
+</head>
+<body>
+  <div class="invoice-container">
+    <svg width="827" height="580" viewBox="0 0 827 580" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <image xlink:href="https://raw.githubusercontent.com/LucasMouraChaser/backgrounds-sent/86dc9c43c4be1f9265bb146d607212a360025633/pagina%201_P%C3%A1gina_1.jpg" data-ai-hint="bill background" x="0" y="0" width="827" height="1169" />
+      
+      <!-- Cabeçalho Energisa -->
+      <foreignObject x="45" y="25" width="130" height="65">
+        <image xlink:href="https://raw.githubusercontent.com/LucasMouraChaser/backgrounds-sent/refs/heads/main/FATURA%20ENERGISA%2017.06_P%C3%A1gina_1%20(2).svg" width="130" height="65" data-ai-hint="energisa logo" />
+      </foreignObject>
+      <foreignObject x="220" y="15" width="500" height="16"><input type="text" style="font-size:11px; font-weight:bold; color:#000;" value="SIMULACAO DE FATURA DA ENERGISA" /></foreignObject>
+      <foreignObject x="220" y="25" width="400" height="18"><input type="text" style="font-size:9px; color:#000;" value="ENERGISA MATO GROSSO - DISTRIBUIDORA DE ENERGIA S A" /></foreignObject>
+      <foreignObject x="220" y="35" width="400" height="18"><input type="text" style="font-size:9px; color:#000;" value="Rua Vereador João Barbosa Caramuru, 184" /></foreignObject>
+      <foreignObject x="220" y="45" width="400" height="18"><input type="text" style="font-size:9px; color:#000;" value="Cuiabá/MT - CEP 78010-000" /></foreignObject>
+      <foreignObject x="220" y="55" width="160" height="18"><input type="text" style="font-size:9px; color:#000;" value="CNPJ XX.XXX.XXX/XXXX-XX" /></foreignObject>
+      <foreignObject x="220" y="65" width="180" height="19"><input type="text" style="font-size:9px; color:#000;" value="Insc. Est. XXXXXXXXXX" /></foreignObject>
+
+      <!-- Bloco Roteiro/Matrícula (superior esquerdo) -->
+      <foreignObject x="73" y="105" width="120" height="14"><input type="text" class="text-left" style="font-size:9px;" value="655-5432-000-0" /></foreignObject>
+      <foreignObject x="208" y="105" width="100" height="14"><input type="text" class="text-left" style="font-size:9px;" value="x" /></foreignObject>
+      <foreignObject x="63" y="120" width="120" height="14"><input type="text" class="text-left" style="font-size:9px;" value="" /></foreignObject> {/* DOM. BANCO */}
+      <foreignObject x="208" y="120" width="100" height="14"><input type="text" class="text-left" style="font-size:9px;" value="" /></foreignObject> {/* DOM. ENT. */}
+      
+      <foreignObject x="73" y="117" width="340" height="24"><input type="text" class="text-left" style="font-size:8px;" value="RESIDENCIAL-CONVENCIONAL BAIXA TENSAO B1/B2/B3" /></foreignObject> {/* CLASSIFICAÇÃO */}
+      <foreignObject x="318" y="127" width="70" height="24"><input type="text" class="text-left" style="font-size:9px;" value="TRIFASICO" /></foreignObject> {/* LIGAÇÃO */}
+      <foreignObject x="200" y="197" width="20" height="18"><input type="text" class="text-center" style="font-size:9px;" value="127" /></foreignObject> {/* TENSÃO NOMINAL DISP */}
+      <foreignObject x="248" y="197" width="40" height="18"><input type="text" class="text-center" style="font-size:9px;" value="117" /></foreignObject> {/* Lim. Min. */}
+      <foreignObject x="328" y="197" width="40" height="18"><input type="text" class="text-center" style="font-size:9px;" value="133" /></foreignObject> {/* Lim. Max. */}
+      
+      <!-- Bloco Datas e NF-e (superior direito) -->
+      <foreignObject x="1000" y="105" width="90" height="18"><input type="text" class="text-right" style="font-size:9px;" value="18/06/2025" /></foreignObject> {/* Data de Apresentação */}
+      <foreignObject x="643" y="120" width="90" height="14"><input type="text" class="text-right" style="font-size:9px;" value="6555432" /></foreignObject> {/* Código Débito Automático */}
+      
+      <foreignObject x="510" y="220" width="70" height="18"><input type="text" class="text-center" style="font-size:9px;" value="18/05/2025" /></foreignObject> {/* Leitura Anterior Data */}
+      <foreignObject x="570" y="220" width="70" height="18"><input type="text" class="text-center" style="font-size:9px;" value="18/06/2025" /></foreignObject> {/* Leitura Atual Data */}
+      <foreignObject x="651" y="220" width="28" height="18"><input type="text" class="text-center" style="font-size:9px;" value="30" /></foreignObject> {/* N° Dias */}
+      <foreignObject x="685" y="220" width="70" height="18"><input type="text" class="text-center" style="font-size:9px;" value="18/07/2025" /></foreignObject> {/* Próxima Leitura Data */}
+
+      <foreignObject x="0" y="0" width="105" height="13"><input type="text" class="text-left" style="font-size:8.5px;" value="017.270.053" /></foreignObject> {/* Nota Fiscal N° */}
+      <foreignObject x="690" y="180" width="45" height="13"><input type="text" class="text-left" style="font-size:8.5px;" value="002" /></foreignObject> {/* Nota Fiscal Série */}
+      <foreignObject x="1000" y="191" width="105" height="13"><input type="text" class="text-left" style="font-size:8.5px;" value="18/05/2025" /></foreignObject> {/* Data Emissão NF */}
+      <foreignObject x="1000" y="218" width="285" height="13"><input type="text" style="font-size:8.5px; letter-spacing:-0.45px;" value="5125 0203 4873 2100 0100 5500 2017 2700 5320 8808 7028" /></foreignObject> {/* Chave de Acesso NF-e */}
+      <foreignObject x="1000" y="243" width="285" height="13"><input type="text" class="text-center" style="font-size:8px;" value="EMITIDO EM CONTINGÊNCIA Pendente da Autorização" /></foreignObject> {/* Contingência */}
+      <!-- QR Code NF-e Placeholder -->
+      <foreignObject x="1000" y="200" width="70" height="13"><input type="text" style="font-size:7px;text-align:center;" value="QR NF-e" /></foreignObject>
+
+
+      <!-- Dados do Cliente (meio-esquerda) -->
+      <foreignObject x="75" y="219" width="355" height="15"><input type="text" style="font-size:15px; font-weight:bold;" value="MERCADO MIX LTDA" /></foreignObject>
+      <foreignObject x="75 " y="245" width="355" height="18"><input type="text" style="font-size:9px;" value="RUA CAMINHO DO SOL, 0 - QD18 LT11 - 78890000" /></foreignObject>
+      <foreignObject x="75" y="270" width="155" height="18"><input type="text" style="font-size:9px;" value="ROTA DO SOL" /></foreignObject> {/* Bairro */}
+      <foreignObject x="75" y="280" width="205" height="18"><input type="text" style="font-size:9px;" value="SORRISO (AG: 167)" /></foreignObject> {/* Cidade/UF */}
+      <foreignObject x="75" y="310" width="155" height="18"><input type="text" style="font-size:10px;" value="05701044165" /></foreignObject> {/* CNPJ/CPF */}
+
+      <!-- Código Cliente / Instalação (abaixo dos dados do cliente) -->
+      <foreignObject x="345" y="265" width="155" height="16"><input type="text" style="font-size:15px; font-weight:bold; color:#000; background:transparent;" value="6555432" /></foreignObject>
+      
+      <!-- Barra Principal Azul -->
+      <foreignObject x="120" y="348" width="182" height="18"><input type="text" style="font-size:11px; font-weight:bold; color:#000; background:transparent;" value="MAIO / 2025" /></foreignObject>
+      <foreignObject x="240" y="348" width="102" height="18"><input type="text" style="font-size:11px; font-weight:bold; color:#000; background:transparent;" value="10/07/2025" /></foreignObject>
+      <foreignObject x="340" y="348" width="222" height="22"><input type="text" style="font-size:16px; font-weight:bold; color:#000;
+background:transparent;" value="R$ 1.644,71" /></foreignObject>
+      
+      <!-- Tabela Itens da Fatura -->
+      <!-- Linha 1: Consumo em kWh -->
+      <foreignObject x="55" y="492" width="132" height="16"><input type="text" style="font-size:8px;background:white;" value="Consumo em kWh" /></foreignObject>
+      <foreignObject x="220" y="492" width="37" height="16"><input type="text" class="text-center" style="font-size:8px;" value="KWH" /></foreignObject>
+      <foreignObject x="245" y="492" width="52" height="16"><input type="text" class="text-right" style="font-size:8px;" value="1.500,00" /></foreignObject>
+      <foreignObject x="275" y="492" width="67" height="16"><input type="text" class="text-right" style="font-size:8px;" value="1,093110" /></foreignObject>
+      <foreignObject x="330" y="492" width="62" height="16"><input type="text" class="text-right" style="font-size:8px;" value="1.630,64" /></foreignObject>
+      <foreignObject x="610" y="487" width="52" height="16"><input type="text" class="text-right" style="font-size:7px;" value="1.353,43" /></foreignObject> {/* PIS Base */}
+      <foreignObject x="666" y="487" width="37" height="16"><input type="text" class="text-right" style="font-size:7px;background:white;" value="1,0945" /></foreignObject> {/* PIS Aliq */}
+      <foreignObject x="705" y="487" width="42" height="16"><input type="text" class="text-right" style="font-size:8px;" value="14,81" /></foreignObject> {/* PIS Valor */}
+      <foreignObject x="610" y="498" width="52" height="16"><input type="text" class="text-right" style="font-size:8px;" value="1.353,43" /></foreignObject> {/* COFINS Base */}
+      <foreignObject x="666" y="498" width="37" height="16"><input type="text" class="text-right" style="font-size:8px;background:white" value="4,9955" /></foreignObject> {/* COFINS Aliq */}
+      <foreignObject x="705" y="498" width="42" height="16"><input type="text" class="text-right" style="font-size:8px;" value="67,61" /></foreignObject> {/* COFINS Valor */}
+      <foreignObject x="620" y="508" width="42" height="16"><input type="text" class="text-right" style="font-size:8px;" value="1.630,64" /></foreignObject> {/* ICMS Base */}
+      <foreignObject x="676" y="512" width="26" height="15"><input type="text" class="text-right" style="font-size:8px;background:white" value="17,00" /></foreignObject> {/* ICMS % */}
+      <foreignObject x="565" y="492" width="272" height="16"><input type="text" style="font-size:7px; color:#555;" value="0,847430"/></foreignObject>
+      <foreignObject x="710" y="361" width="42" height="12"><input type="text" class="text-right" style="font-size:8px;" value="277,21" /></foreignObject> {/* ICMS R$ */}
+
+      <!-- Linha 2: Energia Injetada GDI UC -->
+      <foreignObject x="55" y="504" width="132" height="16"><input type="text" style="font-size:8px;" value="Energia Atv Injetada" /></foreignObject>
+      <foreignObject x="285" y="370" width="67" height="12"><input type="text" class="text-right" style="font-size:8px;" value="0,847430" /></foreignObject>{/* TARIFA ENERGIA INJETADA */}
+      <foreignObject x="330" y="505" width="62" height="16"><input type="text" class="text-right" style="font-size:8px;" value="146,60" /></foreignObject>{/* VALOR ENERGIA INJETADA */}
+            
+      <!-- Tabela Lançamentos e Serviços -->
+      <foreignObject x="55" y="537" width="132" height="16"><input type="text" style="font-size:8px;background:white" value="Contrib de Ilum Pub" /></foreignObject>
+      <foreignObject x="330" y="537" width="62" height="16"><input type="text" class="text-right" style="font-size:8px;" value="13,75" /></foreignObject>
+      
+      <!-- Total Itens -->
+      <foreignObject x="360" y="467" width="62" height="13"><input type="text" class="text-right" style="font-size:9px; font-weight:bold;" value="1.644,71" /></foreignObject>
+      <foreignObject x="520" y="467" width="42" height="13"><input type="text" class="text-right" style="font-size:9px; font-weight:bold;" value="14,81" /></foreignObject> {/* Total PIS */}
+      <foreignObject x="665" y="467" width="42" height="13"><input type="text" class="text-right" style="font-size:9px; font-weight:bold;" value="67,61" /></foreignObject> {/* Total COFINS */}
+      <foreignObject x="705" y="510" width="42" height="16"><input type="text" class="text-right" style="font-size:9px; font-weight:bold;" value="277,21" /></foreignObject> {/* Total ICMS */}
+
+    </svg>
+  </div>
+</body>
+</html>
+
+    
